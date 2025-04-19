@@ -53,7 +53,7 @@ def summarize_article(article_text, niche, tone=None, past_tweets=None):
     # Use past_tweets if provided
     if past_tweets is not None:
         # system_content = f"You are a social media expert summarizing news articles into tweets. Make the tweets sound relevant to {niche}. Also do not tag any other accounts in tweets, or like do not even add about joining sessions or meetings.\n\n Here are some examples of tweets for tone and style:\n{past_tweets}\n\nNow, summarize the following news article into a tweet under 250 characters and it should have the niche part clearly with the niche keyword present in the tweet. Do not include any additional text such as 'here is the summary' nor quotations nor emojis nor anything else.\n\nArticle:\n{article_text}"
-        system_context = f"""
+        system_content = f"""
 You are a social media expert who specializes in transforming news articles into concise tweets that resonate with a specific **niche** audience. Your job is to craft a tweet that follows a particular **tone and style**, based on provided examples.
 
 **STRICT RULES — you must follow every one of them:**
@@ -83,7 +83,7 @@ Now write one tweet that summarizes the following article for the niche using th
     # If tone is provided, include it in the instructions
     elif tone is not None:
         # system_content = f"You are a social media expert summarizing news articles into tweets. Make the tweets sound relevant to {niche}. Also do not tag any other accounts in tweets, or like do not even add about joining sessions or meetings.\n\n The tone of the tweet should be {tone} tone.\n\nNow, summarize the following news article into a tweet under 250 characters with a {tone} tone and it should have the niche part clearly with the niche keyword present in the tweet. Do not include any additional text such as 'here is the summary' nor quotations nor emojis nor anything else.\n\nArticle:\n{article_text}"
-        system_context = f"""
+        system_content = f"""
 You are a social media expert skilled at summarizing news articles into tweets tailored for specific audiences. Your task is to create a single tweet under 250 characters that sounds highly relevant to the specified **niche** and uses the required **tone**.  
 
 **IMPORTANT RULES — follow them STRICTLY:**
