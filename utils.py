@@ -69,8 +69,9 @@ def summarize_article(article_text, niche, tone=None, past_tweets=None):
 
     response = completion(
         # model="openrouter/mistralai/mistral-small-3.1-24b-instruct-2503",
-        model="openrouter/meta-llama/llama-4-scout",
+        model="qwen/qwen-2.5-72b-instruct:free",
         messages=messages,
+        temperature = 1
     )
     return response.choices[0].message.content
 
