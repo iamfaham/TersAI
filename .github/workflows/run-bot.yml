@@ -3,11 +3,11 @@ name: Run Bot
 on:
   schedule:
     # Run the bot every 3 hours, from 6 AM to 1 AM New York time (adjusted for UTC)
-    - cron: "*/5 * * * *"
+    - cron: "0 11,14,17,20,23,2,5 * * *"
   workflow_dispatch:
-  push: 
-    branches:
-      - main
+  # push: 
+  #   branches:
+  #     - main
 
 jobs:
   run-bot:
