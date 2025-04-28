@@ -1,5 +1,6 @@
 import requests
-from litellm import completion
+from openrouter_client import ChatOpenRouter
+from langchain_core.messages import SystemMessage
 from appwrite.client import Client
 from appwrite.services.databases import Databases
 from appwrite.query import Query
@@ -52,7 +53,6 @@ def summarize_article(article_text, niche, tone=None, past_tweets=None):
 
     # Use past_tweets if provided
     if past_tweets is not None:
-        # system_content = f"You are a social media expert summarizing news articles into tweets. Make the tweets sound relevant to {niche}. Also do not tag any other accounts in tweets, or like do not even add about joining sessions or meetings.\n\n Here are some examples of tweets for tone and style:\n{past_tweets}\n\nNow, summarize the following news article into a tweet under 250 characters and it should have the niche part clearly with the niche keyword present in the tweet. Do not include any additional text such as 'here is the summary' nor quotations nor emojis nor anything else.\n\nArticle:\n{article_text}"
         system_content = f"""
 You are a social media expert who specializes in transforming news articles into concise tweets that resonate with a specific **niche** audience. Your job is to craft a tweet that follows a particular **tone and style**, based on provided examples.
 
@@ -82,7 +82,6 @@ Now write one tweet that summarizes the following article for the niche using th
 
     # If tone is provided, include it in the instructions
     elif tone is not None:
-        # system_content = f"You are a social media expert summarizing news articles into tweets. Make the tweets sound relevant to {niche}. Also do not tag any other accounts in tweets, or like do not even add about joining sessions or meetings.\n\n The tone of the tweet should be {tone} tone.\n\nNow, summarize the following news article into a tweet under 250 characters with a {tone} tone and it should have the niche part clearly with the niche keyword present in the tweet. Do not include any additional text such as 'here is the summary' nor quotations nor emojis nor anything else.\n\nArticle:\n{article_text}"
         system_content = f"""
 You are a social media expert skilled at summarizing news articles into tweets tailored for specific audiences. Your task is to create a single tweet under 250 characters that sounds highly relevant to the specified **niche** and uses the required **tone**.  
 
@@ -107,23 +106,19 @@ Now, write a tweet under 250 characters summarizing the article below. Make it r
 
     print("System Content: ", system_content, "\n")
 
-    messages = [
-        {
-            "role": "system",
-            "content": system_content,
-        }
-    ]
-
-    response = completion(
-        # model="openrouter/mistralai/mistral-small-3.1-24b-instruct-2503",
-        model="openrouter/google/gemini-2.0-flash-exp:free",
-        messages=messages,
-        temperature = 1
+    # Initialize the ChatOpenRouter model
+    chat = ChatOpenRouter(
+        model="mistralai/mistral-small-3.1-24b-instruct-2503",  # Use your preferred model
+        temperature=1,
     )
-    return response.choices[0].message.content
+
+    messages = [SystemMessage(content=system_content)]
+
+    response = chat.invoke(messages)
+    print("Response: ", response, "\n")
+    return response.content
 
 
 def format_tweet(article, summary):
-    # tweet = f"{summary} \n\nRead more: {article['url']}"
     tweet = summary
-    return tweet[:280]  # Ensure it doesn't exceed 280 characters
+    return tweet[:280]

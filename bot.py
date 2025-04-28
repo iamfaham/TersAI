@@ -46,6 +46,8 @@ def post_tweet(tweet_text):
 
 def is_niche_related(article, summary, niche_keywords):
     """Check if the article is genuinely about the given niche"""
+    summary = summary or ""
+
     # Combine title, description, and summary text for checking
     text_to_check = (
         article.get("title", "") + " " + article.get("description", "") + " " + summary
