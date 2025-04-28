@@ -108,7 +108,7 @@ Now, write a tweet under 250 characters summarizing the article below. Make it r
 
     # Initialize the ChatOpenRouter model
     chat = ChatOpenRouter(
-        model="mistralai/mistral-small-3.1-24b-instruct-2503",  # Use your preferred model
+        model="google/gemini-2.0-flash-exp:free",
         temperature=1,
     )
 
