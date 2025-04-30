@@ -1,6 +1,5 @@
 import os
 from typing import Optional
-
 from langchain_core.utils.utils import secret_from_env
 from langchain_openai import ChatOpenAI
 from pydantic import Field, SecretStr
