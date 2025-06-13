@@ -2,7 +2,7 @@
 
 ## Description
 
-TersAI is an AI-powered Twitter bot that automates the process of gathering and sharing news updates in a specific niche. It fetches the latest articles from the web, summarizes them into concise, tweet-sized content using a language model, adapts the writing tone to match a target Twitter profile's style, and then posts the result to Twitter automatically. The goal is to consistently deliver relevant updates (especially AI news) in the desired tone to an audience on Twitter.
+TersAI is an AI-powered Twitter bot that automates the process of gathering and sharing news updates in a specific niche. It fetches the latest articles from the web, summarizes them into concise, tweet-sized content using a language model, adapts the writing tone to match a target Twitter profile's style, and then posts the result to Twitter automatically. The goal is to consistently deliver relevant updates in the desired tone to an audience on Twitter.
 
 ## Features
 
